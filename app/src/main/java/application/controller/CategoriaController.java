@@ -23,3 +23,18 @@ public String list(Model ui) {
     ui.addAtribute("categorias", categoriaRepo.findAll());
     return "categoria/list";
 } 
+
+@RequestMapping("/insert")
+public String insert(){
+    return "categoria/insert";
+}
+
+@RequestMapping(value = "/insert", method = RequestMapping.POST)
+public String insert(@RequestParam("nome")String nome){
+     Categoria categoria = new Categoria();
+     categoriaRepo.save(categoria);
+
+
+    return "redirect:/categoria/list";
+    }
+}

@@ -15,9 +15,9 @@ import jakarta.persistence.Table;
 @Table(name = "categorias")
 public class Categoria {
 @Id
-@GeneratedValue(strategy GenerationType. IDENTITY)
+@GeneratedValue(strategy = GenerationType. IDENTITY)
 private long id;
-@Column(unique true, nullable = false)
+@Column(unique = true, nullable = false)
 private String nome;
 
 @OneToMany (mappedBy = "categoria")
