@@ -31,10 +31,66 @@ public String insert(){
 
 @RequestMapping(value = "/insert", method = RequestMapping.POST)
 public String insert(@RequestParam("nome")String nome){
-     Categoria categoria = new Categoria();
-     categoriaRepo.save(categoria);
+Categoria categoria = new Categoria();
+categoriaRepo.save(categoria);
 
 
     return "redirect:/categoria/list";
     }
+
+
+@RequestMapping("/update")
+public String update(
+    @RequestParam("id") long id,
+Model ui) {
+
+    Optional<Categoria> categoria = categoriaRepo.findeyId(id);
+
+if (categoria.isPresent()) {
+    ui.addAtribute("categoria", categoria.get());
+    return "categoria/update";
 }
+
+return "redirect:/categoria/list";
+}
+
+@RequestMapping(value = "/update", method = RequestMethod.POST)
+public String update(
+    @RequestParam("id") long id,
+    @RequestParam("nome") String nome){
+
+        Optional<Categoria> categoria = categoriaRepo.findeyId(id);
+
+        if (categoria.isPresent()) {
+            categoria.get().setNome(nome);
+        
+            categoriaRepo.save(categoria.get());
+        }
+
+        return "redirect:/categoria/list";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(
+@RequestParam("id") long id,
+Model ui) {
+
+        Optional<Categoria> categoria = categoriaRepo.findeyId(id);
+
+        if (categoria.isPresent()) {
+            ui.addAtribute("categoria", categoria.get());
+            return "categoria/delete";
+        }
+        
+        return "redirect:/categoria/list";
+
+}
+
+@RequestMapping(value = "/delete", method = RequestMethod.POST)
+public String delete(@RequestParam("id") long id) {
+categoriaRepo.deleteByID(id);
+return "redirect:/categoria/list";
+}
+    }
+    
+    
