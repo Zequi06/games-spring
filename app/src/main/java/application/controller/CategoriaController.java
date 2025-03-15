@@ -75,7 +75,7 @@ public String update(
 @RequestParam("id") long id,
 Model ui) {
 
-        Optional<Categoria> categoria = categoriaRepo.findeyId(id);
+        Optional<Categoria> categoria = categoriaRepo.findById(id);
 
         if (categoria.isPresent()) {
             ui.addAtribute("categoria", categoria.get());
@@ -88,7 +88,8 @@ Model ui) {
 
 @RequestMapping(value = "/delete", method = RequestMethod.POST)
 public String delete(@RequestParam("id") long id) {
-categoriaRepo.deleteByID(id);
+categoriaRepo.deleteById(id);
+
 return "redirect:/categoria/list";
 }
     }

@@ -14,34 +14,36 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "categorias")
 public class Categoria {
-@Id
-@GeneratedValue(strategy = GenerationType. IDENTITY)
-private long id;
-@Column(unique = true, nullable = false)
-private String nome;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(unique = true, nullable = false)
+    private String nome;
 
-@OneToMany (mappedBy = "categoria")
-private Set<Jogo> jogos = new HashSet<>();
+    @OneToMany(mappedBy = "categoria")
+    private Set<jogo> jogos = new HashSet<>();
 
-public long getId() {
-return id;
-}
+    public long getId() {
+        return id;
+    }
 
-public void setId(long id) {
-this.id = id;
+    public void setId(long id) {
+        this.id = id;
+    }
 
-}
+    public String getNome() {
+        return nome;
+    }
 
-public String getNome() {
-return nome;
-}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-public void setNome(String NOME){
-    return jogos;
-}
+    public Set<jogo> getJogos() {
+        return jogos;
+    }
 
-public void setJogos(Set<jogos> jogos){
-    this.jogos = jogos;
-}
-
+    public void setJogos(Set<jogo> jogos) {
+        this.jogos = jogos;
+    }
 }
